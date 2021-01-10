@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,9 @@ public class ExcelServiceImpl implements ExcelService{
     public String uploadExcel(MultipartFile file) throws Exception{
         //获取到表映射信息
         List<Map<String,Object>> excelColMapping = excelMapper.getExcelColMapping();
-        EasyExcel.read(file.getInputStream(),new ReadExcelListener(excelColMapping)).sheet().doRead();
+        //接收EasyExcel读取完成后返回的信息
+        Map<String,Object> resultMap = new HashMap<>();
+        EasyExcel.read(file.getInputStream(),new ReadExcelListener(excelColMapping,resultMap)).sheet().doRead();
         return null;
     }
 }

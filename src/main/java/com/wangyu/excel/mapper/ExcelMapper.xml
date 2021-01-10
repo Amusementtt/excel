@@ -11,8 +11,9 @@
       is_null as "isNull",
       is_size as "isSize",
       is_create as "isCreate",
-      group as "group"
+      group_name as "groupName"
     FROM
       excel_db_mapping
+    ORDER BY ord ASC
 </select>
 </mapper>
